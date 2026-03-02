@@ -2059,10 +2059,10 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 ├─ ❌ After trial: PERMANENTLY BLOCKED
 ├─ 🔒 No further trial access after use
 ├─ 💰 Contact admin for paid access only
-└─ 👑 Admin: @VIP_X_OFFICIAL
+└─ 👑 Admin: @Venompratap
 
 💰 FOR FULL ACCESS:
-Contact: @VIP_X_OFFICIAL
+Contact: @Venompratap
 
 📡 STATUS: ✅ ONLINE | ⚡ READY FOR FLASH ATTACK
 """
@@ -2134,7 +2134,7 @@ async def mytrial(update: Update, context: ContextTypes.DEFAULT_TYPE):
 ├─ 🔒 Trial access is PERMANENTLY BLOCKED
 ├─ ⚠️ One-time trial already used
 ├─ 💰 Contact admin for paid access
-└─ 👑 Admin: @VIP_X_OFFICIAL
+└─ 👑 Admin: @Venompratap
 """
     
     await update.message.reply_text(trial_status_text)
@@ -2180,7 +2180,7 @@ Reason: {reason}
 ├─ Only paid access now
 
 💰 Contact Admin for Full Access:
-👑 @VIP_X_OFFICIAL
+👑 @Venompratap
 """
         )
         return
@@ -2209,7 +2209,7 @@ Example: /trial 9876543210
 ├─ ❌ After use: PERMANENTLY BLOCKED
 ├─ 🔒 No further trial access
 ├─ 💰 Contact admin for paid access
-└─ 👑 Admin: @VIP_X_OFFICIAL
+└─ 👑 Admin: @Venompratap
 """
         )
         return
@@ -2234,7 +2234,7 @@ Example: /trial 9876543210
 
 APIs are not configured yet.
 
-Contact admin for support: @VIP_X_OFFICIAL
+Contact admin for support: @Venompratap
 """
         )
         return
@@ -2352,7 +2352,7 @@ Use your free trial first:
 ├─ Trial: 60 seconds, ONE TIME ONLY
 ├─ After trial: PERMANENTLY BLOCKED
 ├─ Then contact admin for paid access
-└─ Admin: @VIP_X_OFFICIAL
+└─ Admin: @Venompratap
 """
             )
         else:
@@ -2371,7 +2371,7 @@ You have used your ONE-TIME trial.
 ├─ Paid User: ❌ No
 
 💰 Contact Admin for Full Access:
-👑 @VIP_X_OFFICIAL
+👑 @Venompratap
 ⚠️ Trial access is PERMANENTLY BLOCKED.
 Only paid access available now.
 """
@@ -2454,7 +2454,7 @@ Limits:
 
 APIs are not configured yet.
 
-Contact admin for support: @VIP_X_OFFICIAL
+Contact admin for support: @Venompratap
 """
         )
         return
@@ -2498,7 +2498,7 @@ Contact admin for support: @VIP_X_OFFICIAL
 ├─ Account Type: ✅ PAID USER
 ├─ Trial Status: ❌ BLOCKED (One-time used)
 ├─ Access: Unlimited attacks
-└─ Admin: @VIP_X_OFFICIAL
+└─ Admin: @Venompratap
 
 ⚡ FLASH CONFIGURATION:
 ├─ Speed: FLASH MODE (Level 5)
@@ -2779,7 +2779,7 @@ async def update_flash_final_status(context: ContextTypes.DEFAULT_TYPE, chat_id:
 ├─ 🔒 Trial access is NOW BLOCKED
 ├─ ⚠️ You cannot use trial again
 ├─ 💰 Contact admin for paid access
-└─ 👑 @VIP_X_OFFICIAL
+└─ 👑 @Venompratap
 """
         else:
             final_message += f"""
@@ -2864,7 +2864,7 @@ async def stop_attack(update: Update, context: ContextTypes.DEFAULT_TYPE):
 ├─ 🔒 Trial access is PERMANENTLY BLOCKED
 ├─ ⚠️ Cannot use trial again
 ├─ 💰 Contact admin for paid access
-└─ 👑 @VIP_X_OFFICIAL
+└─ 👑 @Venompratap
 """
     else:
         stop_message += f"""
@@ -2927,7 +2927,7 @@ Speed control is available for PAID USERS only.
 Speed is fixed at Level 5 (FLASH MODE) for trial.
 
 💰 Contact Admin for Full Access:
-@VIP_X_OFFICIAL
+@Venompratap
 """
         )
         return
@@ -3398,7 +3398,7 @@ async def stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
 ├─ 🔒 Trial PERMANENTLY blocked
 ├─ ⚠️ One-time trial already used
 ├─ 💰 Contact admin for paid access
-└─ 👑 Admin: @VIP_X_OFFICIAL
+└─ 👑 Admin: @Venompratap
 """
     
     await update.message.reply_text(stats_text)
@@ -3440,7 +3440,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 ├─ ❌ After trial: PERMANENTLY BLOCKED
 ├─ 🔒 No further trial access
 ├─ 💰 Only paid access after trial
-└─ 👑 Admin: @VIP_X_OFFICIAL
+└─ 👑 Admin: @Venompratap
 """
     
     if is_admin(user_id):
