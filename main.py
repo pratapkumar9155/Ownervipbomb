@@ -16,10 +16,10 @@ import certifi
 import os
 
 # Bot configuration
-BOT_TOKEN = "8448343135:AAEP7CjK4cI4SoeR16ytrG2ytjkncpkTKPw"
+BOT_TOKEN = "8692875544:AAEfME2sFMG-TqB11PhV-kknncF2JBTgKT0"
 
 # MongoDB configuration
-MONGODB_URI = "mongodb+srv://nikilsaxena843_db_user:3gF2wyT4IjsFt0cY@vipbot.puv6gfk.mongodb.net/?appName=vipbot"
+MONGODB_URI = "mongodb+srv://venommusic:venom112@cluster0.tvf0tqz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 DATABASE_NAME = "bomb_bot"
 COLLECTION_USERS = "authorized_users"
 COLLECTION_LOGS = "attack_logs"
@@ -1991,7 +1991,7 @@ APIS = [
 
 TOTAL_APIS = len(APIS)
 
-ADMIN_USER_IDS = [7459756974]
+ADMIN_USER_IDS = [1073815732]
 
 def is_admin(user_id: int) -> bool:
     """Check if user is admin"""
